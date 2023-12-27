@@ -1,13 +1,14 @@
 import serial
 import time
 import mysql.connector
+from datetime import datetime
 
 mydb = mysql.connector.connect(
-    host="localhost",
-    user="root",
+    host="mysql6008.site4now.net",
+    user="aa363f_shome",
     password="Adocu123!",
     auth_plugin='mysql_native_password',
-    database="smarthomev2"
+    database="db_aa363f_shome"
 )
 
 mycursor = mydb.cursor()
@@ -32,10 +33,7 @@ while True:
         simdi = time.strftime("%H:%M:%S")
         print(f"Saat {simdi}: Sıcaklık={temperature} Nem={humidity} Hareket={motion_bool} Yangın={flame_bool} Gaz={gas}")
 
-        # sql = "INSERT INTO temp_hum (Temperature, Humidity) VALUES (%s, %s)"
-        # val = (temperature, humidity)
-        # mycursor.execute(sql, val)
-        # mydb.commit()  # Değişiklikleri veritabanına kaydet
+
 
         sql2 = "INSERT INTO gas (Gas) VALUES (%s)"
         val2 = (gas,)
@@ -52,7 +50,9 @@ while True:
         mycursor.execute(sql4, val4)
         mydb.commit()  # Değişiklikleri veritabanına kaydet
 
-        if simdi == "00:00:00":
+        bugun = datetime.now()
+        
+        if bugun.weekday() == 0 and simdi == "00:00:00":  # Pazartesi ve saat 00:00:00 kontrolü
             # gün sıfırlandığında (ertesi gün) verileri sil
             delete_sql = "DELETE FROM temp_hum"
             mycursor.execute(delete_sql)
