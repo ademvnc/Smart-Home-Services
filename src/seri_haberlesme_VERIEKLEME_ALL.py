@@ -18,14 +18,41 @@ arduino = serial.Serial(arduino_port, baudrate=9600)
 
 print("Bağlantı kuruldu...")
 
-# Odaları tanımlama
-RoomName="Salon"
-RoomID=1
 
-sql="INSERT INTO room (RoomID, RoomName) VALUES (%s, %s)"
-val=(RoomID, RoomName)
+# kullanıcı tanımlama
+UserID=1
+UserEmail="ademmavanaci@gmail.com" # admin mail adresi
+UserName="admin"
+UserSurname="admin" 
+UserPassword="Adocu123!" # admin şifresi
+UserPhone="5534164182" # admin telefon numarası
+NumberOfRooms=3 # adminin sahip olduğu oda sayısı
+Active=1
+
+
+
+# Odaları tanımlama
+RoomID=1
+RoomName="Ana Salon"
+OptimumTemp=25
+OptimumHum=50
+OptimumGas=50
+RoomType="Salon"
+
+
+
+sql= "INSERT INTO user (UserID, Mail, Name, Surname, Password, Phone, NumberOfRooms, Active) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+val=(UserID, UserEmail, UserName, UserSurname, UserPassword, UserPhone, NumberOfRooms, Active)
 mycursor.execute(sql, val)
 mydb.commit() # Değişiklikleri veritabanına kaydet
+
+
+sql2= "INSERT INTO room (RoomID, UserID, RoomName, OptimumTemperature, OptimumHumidity, OptimumGase, RoomType) VALUES (%s, %s, %s, %s, %s, %s)"
+val2=(RoomID,UserID, RoomName, OptimumTemp, OptimumHum, OptimumGas, RoomType)
+mycursor.execute(sql2, val2)
+mydb.commit() # Değişiklikleri veritabanına kaydet
+
+
 
 
 
@@ -57,19 +84,19 @@ while True:
 
 
 
-        sql2 = "INSERT INTO gas (Gas) VALUES (%s)"
-        val2 = (gas,)
-        mycursor.execute(sql2, val2)
-        mydb.commit()  # Değişiklikleri veritabanına kaydet
-
-        sql3 = "INSERT INTO fire (Fire) VALUES (%s)"
-        val3 = (flame_bool,)
+        sql3 = "INSERT INTO gas (Gas) VALUES (%s)"
+        val3 = (gas,)
         mycursor.execute(sql3, val3)
         mydb.commit()  # Değişiklikleri veritabanına kaydet
 
-        sql4 = "INSERT INTO move (Move) VALUES (%s)"
-        val4 = (motion_bool,)
+        sql4 = "INSERT INTO fire (Fire) VALUES (%s)"
+        val4 = (flame_bool,)
         mycursor.execute(sql4, val4)
+        mydb.commit()  # Değişiklikleri veritabanına kaydet
+
+        sql5 = "INSERT INTO move (Move) VALUES (%s)"
+        val5 = (motion_bool,)
+        mycursor.execute(sql5, val5)
         mydb.commit()  # Değişiklikleri veritabanına kaydet
         
        
@@ -78,14 +105,14 @@ while True:
         
         if bugun.weekday() == 0 and simdi == "00:00:00":  # Pazartesi ve saat 00:00:00 kontrolü
             # gün sıfırlandığında (ertesi gün) verileri sil
-            delete_sql = "DELETE FROM temp_hum"
-            mycursor.execute(delete_sql)
-            delete_sql2 = "DELETE FROM gas"
-            mycursor.execute(delete_sql2)
-            delete_sql3 = "DELETE FROM fire"
+            delete_sql6 = "DELETE FROM temp_hum"
+            mycursor.execute(delete_sql6)
+            delete_sql3 = "DELETE FROM gas"
             mycursor.execute(delete_sql3)
-            delete_sql4 = "DELETE FROM motion"
+            delete_sql4 = "DELETE FROM fire"
             mycursor.execute(delete_sql4)
+            delete_sql5 = "DELETE FROM move"
+            mycursor.execute(delete_sql5)
 
             mydb.commit()
 
@@ -95,9 +122,9 @@ while True:
 
     #60 saniyede bir (satır 6 nın katı olduğunda ) temp_hum tablosuna  veri ekle
     if satir % 6 == 0:
-        sql5 = "INSERT INTO temp_hum (Temperature, Humidity) VALUES (%s, %s)"
-        val5 = (temperature, humidity)
-        mycursor.execute(sql5, val5)
+        sql6 = "INSERT INTO temp_hum (Temperature, Humidity) VALUES (%s, %s)"
+        val6 = (temperature, humidity)
+        mycursor.execute(sql6, val6)
         mydb.commit()  # Değişiklikleri veritabanına kaydet
 
       
