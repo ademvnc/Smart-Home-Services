@@ -16,6 +16,19 @@ mycursor = mydb.cursor()
 arduino_port = "COM4"
 arduino = serial.Serial(arduino_port, baudrate=9600)
 
+print("Bağlantı kuruldu...")
+
+# Odaları tanımlama
+RoomName="Salon"
+RoomID=1
+
+sql="INSERT INTO room (RoomID, RoomName) VALUES (%s, %s)"
+val=(RoomID, RoomName)
+mycursor.execute(sql, val)
+mydb.commit() # Değişiklikleri veritabanına kaydet
+
+
+
 satir = 0
 
 while True:
@@ -30,8 +43,17 @@ while True:
         # Yangın sensörü verisini bool olarak tanımla
         flame_bool = bool(flame)
 
+
+
+
+        # Verileri ekrana yazdırma
         simdi = time.strftime("%H:%M:%S")
         print(f"Saat {simdi}: Sıcaklık={temperature} Nem={humidity} Hareket={motion_bool} Yangın={flame_bool} Gaz={gas}")
+
+        
+        
+
+        # Verileri veritabanına ekleme
 
 
 
@@ -45,10 +67,12 @@ while True:
         mycursor.execute(sql3, val3)
         mydb.commit()  # Değişiklikleri veritabanına kaydet
 
-        sql4 = "INSERT INTO motion (Motion) VALUES (%s)"
+        sql4 = "INSERT INTO move (Move) VALUES (%s)"
         val4 = (motion_bool,)
         mycursor.execute(sql4, val4)
         mydb.commit()  # Değişiklikleri veritabanına kaydet
+        
+       
 
         bugun = datetime.now()
         
@@ -71,9 +95,9 @@ while True:
 
     #60 saniyede bir (satır 6 nın katı olduğunda ) temp_hum tablosuna  veri ekle
     if satir % 6 == 0:
-        sql = "INSERT INTO temp_hum (Temperature, Humidity) VALUES (%s, %s)"
-        val = (temperature, humidity)
-        mycursor.execute(sql, val)
+        sql5 = "INSERT INTO temp_hum (Temperature, Humidity) VALUES (%s, %s)"
+        val5 = (temperature, humidity)
+        mycursor.execute(sql5, val5)
         mydb.commit()  # Değişiklikleri veritabanına kaydet
 
       
