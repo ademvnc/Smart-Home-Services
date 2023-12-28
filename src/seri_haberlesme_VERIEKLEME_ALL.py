@@ -117,12 +117,12 @@ while True:
         mycursor.execute(sql3, val3)
         mydb.commit()  # Değişiklikleri veritabanına kaydet
 
-        sql4 = "INSERT INTO fire (Fire) VALUES (%s,%s)"
+        sql4 = "INSERT INTO fire (RoomID, Fire) VALUES (%s,%s)"
         val4 = (RoomID,flame_bool)
         mycursor.execute(sql4, val4)
         mydb.commit()  # Değişiklikleri veritabanına kaydet
 
-        sql5 = "INSERT INTO move (Move) VALUES (%s,%s)"
+        sql5 = "INSERT INTO move (RoomID, Move) VALUES (%s,%s)"
         val5 = (RoomID,motion_bool)
         mycursor.execute(sql5, val5)
         mydb.commit()  # Değişiklikleri veritabanına kaydet
