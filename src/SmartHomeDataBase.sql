@@ -137,45 +137,45 @@ CREATE TABLE AVG_Pot_Humidity_Day (
 );
 
 
--- Calculate hourly averages for Temperature and Humidity and insert into AVG_Temp_Hum_Hr
-INSERT INTO AVG_Temp_Hum_Hr (RoomID, AvgTemperature, AvgHumidity, Time)
-SELECT RoomID, AVG(Temperature), AVG(Humidity), NOW()
-FROM Temp_Hum
-WHERE Time > NOW() - INTERVAL 1 HOUR
-GROUP BY RoomID;
-
--- Calculate hourly averages for Gas and insert into AVG_Gas_Hr
-INSERT INTO AVG_Gas_Hr (RoomID, AvgGas, Time)
-SELECT RoomID, AVG(Gas), NOW()
-FROM Gas
-WHERE Time > NOW() - INTERVAL 1 HOUR
-GROUP BY RoomID;
-
--- Calculate hourly averages for Pot Humidity and insert into AVG_Pot_Humidity_Hr
-INSERT INTO AVG_Pot_Humidity_Hr (PotID, AvgHumidity, Time)
-SELECT PotID, AVG(Humidity), NOW()
-FROM Pot_Humidity
-WHERE Time > NOW() - INTERVAL 1 HOUR
-GROUP BY PotID;
-
--- Calculate daily averages for Temperature and Humidity and insert into AVG_Temp_Hum_Day
-INSERT INTO AVG_Temp_Hum_Day (RoomID, AvgTemperature, AvgHumidity, Date)
-SELECT RoomID, AVG(Temperature), AVG(Humidity), CURRENT_DATE()
-FROM Temp_Hum
-WHERE Time > CURRENT_DATE() - INTERVAL 1 DAY
-GROUP BY RoomID;
-
--- Calculate daily averages for Gas and insert into AVG_Gas_Day
-INSERT INTO AVG_Gas_Day (RoomID, AvgGas, Date)
-SELECT RoomID, AVG(Gas), CURRENT_DATE()
-FROM Gas
-WHERE Time > CURRENT_DATE() - INTERVAL 1 DAY
-GROUP BY RoomID;
-
--- Calculate daily averages for Pot Humidity and insert into AVG_Pot_Humidity_Day
-INSERT INTO AVG_Pot_Humidity_Day (PotID, AvgHumidity, Date)
-SELECT PotID, AVG(Humidity), CURRENT_DATE()
-FROM Pot_Humidity
-WHERE Time > CURRENT_DATE() - INTERVAL 1 DAY
-GROUP BY PotID;
-
+CREATE EVENT IF NOT EXISTS avg_temp_hum_hr_event
+ON SCHEDULE EVERY 1 HOUR
+DO
+  INSERT INTO avg_temp_hum_hr (AvgTemperature, AvgHumidity)
+  SELECT AVG(Temperature), AVG(Humidity) FROM temp_hum
+  WHERE timestamp >= NOW() - INTERVAL 1 HOUR;
+  
+  CREATE EVENT IF NOT EXISTS avg_temp_hum_day_event
+ON SCHEDULE EVERY 1 DAY
+DO
+  INSERT INTO avg_temp_hum_day (AvgTemperature, AvgHumidity)
+  SELECT AVG(Temperature), AVG(Humidity) FROM temp_hum
+  WHERE timestamp >= NOW() - INTERVAL 1 DAY;
+  
+  CREATE EVENT IF NOT EXISTS avg_gas_hr_event
+ON SCHEDULE EVERY 1 HOUR
+DO
+  INSERT INTO avg_gas_hr (AvgGas)
+  SELECT AVG(Gas) FROM gas
+  WHERE timestamp >= NOW() - INTERVAL 1 HOUR;
+  
+  CREATE EVENT IF NOT EXISTS avg_gas_day_event
+ON SCHEDULE EVERY 1 DAY
+DO
+  INSERT INTO avg_gas_day (AvgGas)
+  SELECT AVG(Gas) FROM gas
+  WHERE timestamp >= NOW() - INTERVAL 1 DAY;
+  
+  
+  CREATE EVENT IF NOT EXISTS avg_pot_humidity_hr_event
+ON SCHEDULE EVERY 1 HOUR
+DO
+  INSERT INTO avg_pot_humidity_hr (AvgHumidity)
+  SELECT AVG(Humidity) FROM pot_humidity
+  WHERE timestamp >= NOW() - INTERVAL 1 HOUR;
+  
+  CREATE EVENT IF NOT EXISTS avg_pot_humidity_day_event
+ON SCHEDULE EVERY 1 DAY
+DO
+  INSERT INTO avg_pot_humidity_day (AvgHumidity)
+  SELECT AVG(Humidity) FROM pot_humidity
+  WHERE timestamp >= NOW() - INTERVAL 1 DAY;

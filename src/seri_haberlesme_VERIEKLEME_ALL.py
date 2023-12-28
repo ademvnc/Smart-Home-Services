@@ -55,6 +55,7 @@ UserSurname="admin"
 UserPassword="Adocu123!" # admin şifresi
 UserPhone="5534164182" # admin telefon numarası
 NumberOfRooms=3 # adminin sahip olduğu oda sayısı
+
 Active=1
 
 
