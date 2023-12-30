@@ -21,8 +21,8 @@ CREATE TABLE Room (
     OptimumHumidity FLOAT(10),
     OptimumGase FLOAT(10),
     RoomType VARCHAR(50),
-    PRIMARY KEY (RoomID),
-    FOREIGN KEY (UserID) REFERENCES User(UserID) ON DELETE CASCADE
+    PRIMARY KEY (RoomID)
+    
 );
 
 -- Pot Table
@@ -30,9 +30,9 @@ CREATE TABLE Pot (
     RoomID INT(10),
     PotID INT(10) NOT NULL AUTO_INCREMENT,
     PlantType VARCHAR(50),
-    Time TIMESTAMP,
-    PRIMARY KEY (PotID),
-    FOREIGN KEY (RoomID) REFERENCES Room(RoomID) ON DELETE CASCADE
+    Time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (PotID)
+   
 );
 
 -- Temp_Hum Table
@@ -40,42 +40,42 @@ CREATE TABLE Temp_Hum (
     RoomID INT(10),
     Temperature FLOAT(10),
     Humidity FLOAT(10),
-    Time TIMESTAMP,
-    FOREIGN KEY (RoomID) REFERENCES Room(RoomID) ON DELETE CASCADE
+    Time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  
 );
 
 -- Gas Table
 CREATE TABLE Gas (
     RoomID INT(10),
     Gas FLOAT(10),
-    Time TIMESTAMP,
-    FOREIGN KEY (RoomID) REFERENCES Room(RoomID) ON DELETE CASCADE
+    Time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    
 );
 
 -- Fire Table
 CREATE TABLE Fire (
     RoomID INT(10),
     Fire TINYINT(1),
-    Time TIMESTAMP,
-    FOREIGN KEY (RoomID) REFERENCES Room(RoomID) ON DELETE CASCADE
+    Time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    
 );
 
 -- Move Table
 CREATE TABLE Move (
     RoomID INT(10),
     Move INT(1),
-    Time TIMESTAMP,
-    FOREIGN KEY (RoomID) REFERENCES Room(RoomID) ON DELETE CASCADE
+    Time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
 );
 
 -- Pot_Humidity Table
 CREATE TABLE Pot_Humidity (
     PotID INT(10),
     Humidity FLOAT(10),
-    Time TIMESTAMP,
+    Time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     RoomID INT(10),
-    FOREIGN KEY (PotID) REFERENCES Pot(PotID) ON DELETE CASCADE,
-	FOREIGN KEY (RoomID) REFERENCES Room(RoomID) ON DELETE CASCADE
+    FOREIGN KEY (PotID) REFERENCES Pot(PotID) ON DELETE CASCADE
+	
 );
 
 
@@ -85,27 +85,26 @@ CREATE TABLE AVG_Temp_Hum_Hr (
     RoomID INT(10),
     AvgTemperature FLOAT(10),
     AvgHumidity FLOAT(10),
-    Time TIMESTAMP,
-    PRIMARY KEY (RoomID, Time),
-    FOREIGN KEY (RoomID) REFERENCES Room(RoomID)
+    Time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (RoomID, Time)
+    
 );
 
 -- Average Gas per Hour Table
 CREATE TABLE AVG_Gas_Hr (
     RoomID INT(10),
     AvgGas FLOAT(10),
-    Time TIMESTAMP,
-    PRIMARY KEY (RoomID, Time),
-    FOREIGN KEY (RoomID) REFERENCES Room(RoomID)
+    Time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (RoomID, Time)
 );
 
 -- Average Pot Humidity per Hour Table
 CREATE TABLE AVG_Pot_Humidity_Hr (
     PotID INT(10),
     AvgHumidity FLOAT(10),
-    Time TIMESTAMP,
-    PRIMARY KEY (PotID, Time),
-    FOREIGN KEY (PotID) REFERENCES Pot(PotID)
+    Time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (PotID, Time)
+ 
 );
 
 -- Average Temperature and Humidity per Day Table
@@ -114,8 +113,8 @@ CREATE TABLE AVG_Temp_Hum_Day (
     AvgTemperature FLOAT(10),
     AvgHumidity FLOAT(10),
     Date DATE,
-    PRIMARY KEY (RoomID, Date),
-    FOREIGN KEY (RoomID) REFERENCES Room(RoomID)
+    PRIMARY KEY (RoomID, Date)
+    
 );
 
 -- Average Gas per Day Table
@@ -123,8 +122,8 @@ CREATE TABLE AVG_Gas_Day (
     RoomID INT(10),
     AvgGas FLOAT(10),
     Date DATE,
-    PRIMARY KEY (RoomID, Date),
-    FOREIGN KEY (RoomID) REFERENCES Room(RoomID)
+    PRIMARY KEY (RoomID, Date)
+  
 );
 
 -- Average Pot Humidity per Day Table
@@ -132,9 +131,11 @@ CREATE TABLE AVG_Pot_Humidity_Day (
     PotID INT(10),
     AvgHumidity FLOAT(10),
     Date DATE,
-    PRIMARY KEY (PotID, Date),
-    FOREIGN KEY (PotID) REFERENCES Pot(PotID)
+    PRIMARY KEY (PotID, Date)
+    
 );
+
+SET time_zone = '+03:00';
 
 
 
