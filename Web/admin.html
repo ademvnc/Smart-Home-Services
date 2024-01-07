@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+    <title>Admin Dashboard</title>
+    <script src="admin.js"></script>
+
+
+</head>
+
+<body>
+    <header>
+        <h1>Admin Page</h1>
+    </header>
+    <nav>
+        <a href="#">Main</a>
+        <a href="#" onclick="redirectToAdmin()" >Users</a>
+        <a href="#">Product</a>
+        <a href="#">Graphs</a>
+        <a href="#">Settings</a>
+    </nav>
+    <section>
+        <section>
+            <section id="usersec">
+            <div class="users" id="userList">
+                <!-- Kullanıcılar buraya dinamik olarak eklenir -->
+            </section>
+            <section id="roomsec">
+                <div id="roomList">
+
+                </div>
+            </section>
+            </div>
+            <div>
+                <p>Add a new user</p>
+                <button onclick="openUserInfoModalAddUser()">Add User</button>
+            </div>
+        </section>
+    </section>
+    <section class="information">
+    <!-- User Info Modal -->
+    <div class="user-info" id="userInfoModal">
+        <h2 id="modalTitle">Information</h2>
+        <input type="text" id="userName" placeholder="Name">
+        <input type="text" id="userSurname" placeholder="Surname">
+        <input type="text" id="userPhone" placeholder="Phone">
+        <input type="email" id="userEmail" placeholder="Email">
+        <input type="text" id="password" placeholder="Password" style="display: none;">
+        <input type="number" id="userRoom" placeholder="Number of Room">
+        <input type="number" id="userActive" placeholder="Active">
+        <button id="saveButton" onclick="saveUserInfo()">Save</button>
+        <button onclick="closeUserInfo()">Cancel</button>
+    <div id="roomInfoModal">
+        <input type="text" id="roomName" placeholder="Name">
+        <input type="text" id="optimumTemperature" placeholder="Optimum Temperature">
+        <input type="text" id="optimumHumidity" placeholder="Optimum Humidity">
+        <input type="text" id="optimumGase" placeholder="Optimum Gase">
+        <select name="roomType" id="roomType">
+            <option value="Bedroom">Bedroom</option>
+            <option value="Living Room">Living Room</option>
+            <option value="Kitchen">Kitchen</option>
+            <option value="Bathroom">Bathroom</option>
+            <option value="Office">Balcony</option>
+            <option value="Children Room">Children Room</option>
+            <option value="Other">Other</option>
+        </select>
+        <button id="saveButton" onclick="addRoom()">Save</button>
+        <button onclick="closeRoomInfo()">Cancel</button></div>
+    </div>
+    </section>
+    <script>
+        function openUserInfo(userId) {
+            var modal = document.getElementById('userInfoModal');
+
+            modal.style.display = 'block';
+            // Burada, userId'ye göre kullanıcı bilgilerini modal içinde doldurabilirsiniz.
+        }
+
+        function closeUserInfo() {
+            var modal = document.getElementById('userInfoModal');
+            modal.style.display = 'none';
+        }
+        function redirectToAdmin() {
+        closeUserInfo();
+        }
+        /*function saveUserInfo() {
+            // Burada, modal içindeki bilgileri kullanarak kullanıcı bilgilerini güncelleyebilirsiniz.
+            closeUserInfo();
+        }*/
+    </script>
+</body>
+
+</html>

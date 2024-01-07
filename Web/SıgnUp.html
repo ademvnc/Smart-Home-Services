@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Sign Up</title>
+    <style>
+        body {
+            background-color: white;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            font-family: Arial, sans-serif;
+            height: 100%;
+        }
+
+        .container {
+            position: relative;
+            background-color: #C8C8C8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 400px;
+            width: 90%;
+           /* border: 5px solid #1C3341;*/
+            border-radius: 10px;
+            padding: 40px 60px 80px;
+            box-shadow: 10px 10px 5px 0px rgba(109, 105, 105, 0.5);
+        }
+
+        .title {
+           /* background-color: #1a2a3c;*/
+            padding: 0 0;
+            margin-top: 20px;
+            /*border: 3px solid #1C3341;*/
+            border-radius: 10px;
+            color: black;
+        }
+        h2 {
+           font-size: 25px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+            row-gap: 10px;
+            display: flex;
+            flex-direction: column;
+            
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        a:hover {
+            transform: scale(1.1);
+        }
+        h3 {
+            color: #4691E0;
+            font-size: 30px;
+            margin-bottom: 10px;
+            position: absolute;
+            top: 0px;
+            left: 10px;
+        }
+        .so{
+            display: flex;
+            flex-direction: row;
+            text-align: left;
+            margin-left: 10px;
+            padding :10px;
+           
+        }
+        input{
+            width:300px;
+                height:30px;
+                background-color: white;
+                padding-left:15px;
+                border-radius: 5px;
+                font-size: 15px
+        }
+        .loader {
+            display: block;
+            --height-of-loader: 4px;
+            --loader-color: purple;
+            width: 160px;
+            height: var(--height-of-loader);
+            border-radius: 30px;
+            background-color: rgba(0, 0, 0, 0.2);
+            position: absolute;
+            top: 10px; /* Adjust the top value as needed */
+            left: 10px;
+        }
+
+        .loader::before {
+            content: "";
+            position: absolute;
+            background: var(--loader-color);
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            border-radius: 30px;
+            animation: moving 5s ease-in-out infinite;
+            ;
+            }
+
+            @keyframes moving {
+            50% {
+                width: 100%;
+            }
+
+            100% {
+                width: 0;
+                right: 0;
+                left: unset;
+            }
+            }
+            .foto {
+                background-color: white;
+        }
+        .foto img {
+        width: 170px; /* Adjust the width as needed */
+        height: auto;
+        position: absolute;
+        left: 51.5%;
+        transform: translateX(-50%);
+        border-radius: 50%;
+        border: 3px solid white; /* Match the container's background color */
+        z-index: 1; /* Set a higher z-index to bring the image in front of the container */
+    
+        }
+        .container {
+            position: relative;
+            background-color: #C8C8C8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 400px;
+            width: 80%;
+           /* border: 5px solid #1C3341;*/
+            border-radius: 10px;
+            padding: 40px 60px 80px;
+            box-shadow: 10px 10px 5px 0px rgba(109, 105, 105, 0.5);
+            margin-top: 105px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="loader"></div>
+    <h3>ELTAGRON</h3>
+    <div class="foto">
+    <img src="image/eltagronhouse.jpg"  style="border-radius:50% ; margin:auto">
+    <div class="container" id="signin">
+        <div class="title" >
+            <h2 >SIGN UP</h2>
+           <!-- <span style="font-size: 15px;color:grey; text-align: center;">Choose one of the Sıgn Up methods.</span>
+            <div class="social-icons">
+                
+                <i style="font-size: 20px;" class="fab fa-github"></i>
+                <i class='bx bxl-instagram-alt'></i>
+            </div>-->
+        </div>
+        <form id="signUpForm"  style="display: flex; flex-direction: column; align-items: center;">
+            <div class="form-group">
+                <input  type="text" id="ad" name="ad" placeholder="Name" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="soyAd" name="soyAd" placeholder="Surname" required>
+            </div>
+            <div class="form-group">
+                <input  type="text" id="email" name="email" placeholder="E-mail"
+                 required>
+            </div>
+            <div class="form-group">
+                <input style="border-radius: 5px;" type="phones" id="phone" name="phone" placeholder="Phone">
+            </div>
+            <div class="form-group">
+                <input type="password" id="passWord" name="passWord"  placeholder="Password" required>
+            </div>
+
+            <!--<div class ="content" style="margin-top: 0px;">
+                <ul class = "requirement-list" style = " list-style : none; font-size:12px;">
+                    <p style ="font-size:16px;margin-bottom: 0px; margin-top:0px">Şifre bunları içermelidir</p>
+                    <li>
+                        <i class = "fa-solid fa-circle" style="font-size: 9px; color:#aaa"></i>
+                        <span> en az 8 karakter uzunluğunda olmalı </span>
+                    </li>
+                    <li>
+                        <i class = "fa-solid fa-circle" style="font-size: 9px; color:#aaa"></i>
+                        <span> en az 1 sayı içermeli (0..9)</span>
+                    </li>
+                    <li>
+                        <i class = "fa-solid fa-circle" style="font-size: 9px; color:#aaa"></i>
+                        <span> en az 1 harf içermeli (a..z) </span>
+                    </li>
+                    <li>
+                        <i class = "fa-solid fa-circle" style="font-size: 9px; color:#aaa"></i>
+                        <span> en az 1 sembol içermeli (!..$) </span>
+                    </li>
+                    <li>
+                        <i class = "fa-solid fa-circle" style="font-size: 9px; color:#aaa"></i>
+                        <span> en az bir büyük harf içermeli (A..Z) </span>
+                    </li>
+                </ul>
+            </div>-->
+            <div class="form-group">
+                <input name="passwordd" placeholder="Confirm Password " required>
+            </div>
+            
+            <!--<div  class="form-group">
+                <label for="odaSayisi">Select number of rooms:</label>
+                <select style="border-radius: 5px;"  id="odaSayisi" name="odaSayisi" required onchange = "getOptionValue()" >
+                    <option value="0" disabled selected style="display:none;border-radius: 5px;"  >Select Number of Rooms </option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                     Diğer seçenekleri buraya ekleyebilirsiniz 
+                </select>
+                <div id="form" style="display: flex; flex-direction: column;" >
+
+                </div>
+            </div>-->
+            <div class="form-group" id="radioContainer"></div>
+            <button type="submit" onclick="submitForm()"
+                style="background-color: #4691E0;color:white ;font-size: 18px; border-radius: 5px;  ">Sign
+                Up</button>
+                
+            <!-- ! <a href="ev">Sign up now</a> -->
+            <span class="text" style="font-size: 15px;color:gray; margin-top: 17px; text-align: center";>Sign Up Social Account</span>
+            <div class="so">
+                <div class="github" style="margin-right: 10px;">
+                    <i onclick="githubLogin()" class="fa-brands fa-github" style="font-size: 20px;color:black"></i></div>
+                <div class="twitter" style="margin-right: 10px;">
+                    <a href="https://twitter.com/home"><i class="fa-brands fa-x-twitter" style="font-size: 20px;color:#173248"></i></a>
+                    </div>
+                <div class="instagram" style="margin-right: 5px;">
+                    <a href=""><i class="fa-brands fa-square-instagram"style="font-size: 22px;color:purple"></i></a>
+                </div>
+            </div>
+        </form>
+        <div style="display: flex;flex-direction: column; row-gap: 5px; width: 100%; align-items: center;">
+            <span style="font-size: 15px;color:grey  ; text-align: center;">Do you have an account?</span>
+            <a href="index.html" style="color: black;">Sign in now</a>
+        </div>
+       </div>
+    </div>
+    <script src="SıgnUp.js">
+    </script>
+</body>
+
+</html>

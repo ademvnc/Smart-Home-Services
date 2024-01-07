@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width , initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <title>Sıgn In</title>
+  <style>
+    body {
+      background-color: white;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-attachment: fixed;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        font-family: Arial, sans-serif;
+        height: 100%;
+        margin-top: 60px;
+        }
+        .container {
+      background-color: #C8C8C8;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 300px;
+      width: 90%;
+      border-radius: 10px;
+      padding: 40px 60px 80px;
+      box-shadow: 10px 10px 5px 0px rgba(109, 105, 105, 0.5);
+      margin-top: 65px; /* Adjust the margin-top value to move the container down */
+    }
+        .title {
+            /* background-color: #1a2a3c;*/
+            padding: 0 0;
+            /*border: 3px solid #1C3341;*/
+            border-radius: 10px;
+            color: black;
+            margin-top: 15px;
+        }
+        .form-group {
+        margin-bottom: 15px;
+        row-gap: 10px;
+        display: flex;
+        flex-direction: column;
+        }
+        h2 {
+        width: 100%;
+        }
+        a:hover{
+            transform:scale(1.1);
+        }
+        button:hover{
+            transform:scale(1.1);
+        }
+        .so{
+            display: flex;
+            flex-direction: row;
+            text-align: left;
+            margin-left: 20px;
+            padding :10px;
+        }
+        input{
+            width:300px;
+                height:30px;
+                background-color: white;
+                padding-left:15px;
+                border-radius: 5px;
+                font-size: 15px
+        }
+        h3 {
+            color: #4691E0;
+            font-size: 30px;
+            margin-bottom: 10px;
+            position: absolute;
+            top: 0px;
+            left: 10px;
+        }
+        .foto {
+      position: relative;
+      background-color: white;
+    }
+    .foto img {
+      width: 160px; /* Adjust the width as needed */
+      height: auto;
+      position: absolute;
+      top: -40px; /* Adjust the top value to partially extend outside the container */
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      border: 3px solid white; /* Match the container's background color */
+      z-index: 1; /* Set a higher z-index to bring the image in front of the container */
+    }
+    .loader {
+            display: block;
+            --height-of-loader: 4px;
+            --loader-color: purple;
+            width: 160px;
+            height: var(--height-of-loader);
+            border-radius: 30px;
+            background-color: rgba(0, 0, 0, 0.2);
+            position: absolute;
+            top: 10px; /* Adjust the top value as needed */
+            left: 10px;
+        }
+
+        .loader::before {
+            content: "";
+            position: absolute;
+            background: var(--loader-color);
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            border-radius: 30px;
+            animation: moving 5s ease-in-out infinite;
+            ;
+            }
+
+            @keyframes moving {
+            50% {
+                width: 100%;
+            }
+
+            100% {
+                width: 0;
+                right: 0;
+                left: unset;
+            }
+            }
+  </style>
+  <title>Giris Yap</title>
+</head>
+
+<body>
+  <div class="loader"></div>
+  <h3>ELTAGRON</h3>
+  <div class="foto">
+    <img src="image/eltagronhouse.jpg"  style="border-radius:50% ; margin:auto">
+  <div class="container" id="signin">
+    <div class="title">
+      <h2>SIGN IN</h2>
+    </div>
+    <form id="signInForm" onsubmit="return validateForm()"  style="display: flex; flex-direction: column; align-items: center;">
+      <div class="form-group">
+        <input  type="email" id="email" name="email" placeholder="E-mail" required>
+      </div>
+      <div class="form-group">
+        <input  type="password" id="password" name="password" placeholder="Password" required>
+      </div>
+
+      <div class="form-group">
+        <button type="submit"  style="background-color: #4691E0;color:white ;font-size: 18px; border-radius: 5px;  ">Sign In</button>
+      </div>
+      <div class="text" style="font-size: 15px;color:gray; text-align: center";>Sign In Social Account</div>
+      <div class="so">
+      <div class="github" style="margin-right: 10px;">
+        <i onclick="githubLogin()" class="fa-brands fa-github" style="font-size: 20px;color:black"></i></div>
+        <div class="twitter" style="margin-right: 10px;">
+          <a href="https://twitter.com/home"><i class="fa-brands fa-x-twitter" style="font-size: 20px;color:#173248"></i></a>
+        </div>
+        <div class="instagram" style="margin-right: 5px;">
+          <a href=""><i class="fa-brands fa-square-instagram"style="font-size: 22px;color:purple"></i></a>
+        </div>
+      </div>
+    </form>
+    <div style="display: flex;flex-direction: column; row-gap: 10px; width: 100%; align-items: center; margin-top: 0px;">
+      <span style="font-size: 15px;color:gray; text-align: center;">Don’t have an account?</span>
+      <a style="color:black" href="SıgnUp.html">Sign up now</a>
+    </div>
+  </div>
+</div>
+  <script src="SıgnIn.js"></script>
+</body>
+
+</html>
