@@ -28,6 +28,7 @@ mydb.commit()
 time.sleep(3)
 
 
+
 print("Cihaz bağlantısı kuruluyor...")
 time.sleep(3)
 
