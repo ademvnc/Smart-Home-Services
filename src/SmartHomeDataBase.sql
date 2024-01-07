@@ -430,6 +430,6 @@ END //
 DELIMITER ;
 
 
---SET TIMEZONE
+-- SET TIMEZONE
 
 SET time_zone = '+03:00';
